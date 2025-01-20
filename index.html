@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" href="styles.css"> -->
+        <title>Watermark App</title>
+    </head>
+
+    <body>
+        <h1>Watermarker</h1>
+        <form id="watermarkForm">
+            <div>
+                <label for="input-folder">Input Folder:</label>
+                <input type="text" id="input-folder" placeholder="Default: ./input_images" value="./input_images">
+                <button id="browse-input" type="button">Browse</button>
+            </div>
+            <div>
+                <label for="output-folder">Output Folder:</label>
+                <input type="text" id="output-folder" placeholder="Default: ./output_images" value="./output_images">
+                <button id="browse-output" type="button">Browse</button>
+            </div>
+            <label>Watermark Text: <input type="text" id="watermarkText" value="© YourName"></label><br>
+            <label>Font Size: <input type="number" id="fontSize" value="40"></label><br>
+            <label>Opacity (0-100): <input type="number" id="opacity" value="20"></label><br>
+            <label>Padding Top/Bottom: <input type="number" id="paddingTopBottom" value="200"></label><br>
+            <label>Padding Left/Right: <input type="number" id="paddingLeftRight" value="400"></label><br>
+            <label>Crop to Aspect Ratio: <input type="checkbox" id="crop"></label><br><br>
+            <button type="button" id="startButton">Start</button>
+        </form>
+        <div id="statusMessage" style="margin-top: 20px; color: green;"></div>
+        <p>© 2025 | Created & Designed by trleahy</p>
+    </body>
+    <script src="renderer.js"></script>
+</html>
