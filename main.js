@@ -10,10 +10,11 @@ const documentsPath = app.getPath('documents'); // Get user's Documents folder
 const appFolder = path.join(documentsPath, 'watermarker-app'); // Root folder for the app
 const logsFolder = path.join(appFolder, 'logs'); // Logs folder
 const outputFolder = path.join(appFolder, 'output'); // Output folder
+const inputFolder = path.join(appFolder, 'input'); // Input Folder
 
 // Ensure required folders exist
 function createRequiredFolders() {
-  [appFolder, logsFolder, outputFolder].forEach(folder => {
+  [appFolder, logsFolder, outputFolder, inputFolder].forEach(folder => {
     if (!fs.existsSync(folder)) {
       logger.debug(`Creating required folder: ${folder}`);
       fs.mkdirSync(folder, { recursive: true });
@@ -51,10 +52,12 @@ app.on('ready', () => {
   logger.info('Required folders checked and created if necessary.');
 
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 500,
-    minHeight: 400,
-    minWidth: 400,
+    width: 600,
+    height: 700,
+    minHeight: 600,
+    maxHeight: 600,
+    minWidth: 700,
+    maxWidth: 700,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -80,7 +83,7 @@ ipcMain.handle('apply-watermark', async (event, config) => {
     crop,
   } = config;
 
-  // Use the predefined output folder
+  // Use the predefined folders
   const outputDir = path.join(app.getPath('documents'), 'watermarker-app', 'output');
 
   try {
