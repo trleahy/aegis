@@ -56,16 +56,3 @@ document.getElementById('browse-input').addEventListener('click', async (event) 
     logMessage('warn', 'Input folder selection was canceled.');
   }
 });
-
-document.getElementById('browse-output').addEventListener('click', async (event) => {
-  event.preventDefault(); // Prevent form submission
-  logMessage('info', 'Browse output folder button clicked');
-
-  const result = await window.electronAPI.selectFolder();
-  if (result) {
-    document.getElementById('output-folder').value = result;
-    logMessage('info', `Output folder selected: ${result}`);
-  } else {
-    logMessage('warn', 'Output folder selection was canceled.');
-  }
-});

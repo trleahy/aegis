@@ -5,6 +5,22 @@ const fs = require('fs');
 const winston = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 
+// Define folder structure
+const documentsPath = app.getPath('documents'); // Get user's Documents folder
+const appFolder = path.join(documentsPath, 'watermarker-app'); // Root folder for the app
+const logsFolder = path.join(appFolder, 'logs'); // Logs folder
+const outputFolder = path.join(appFolder, 'output'); // Output folder
+
+// Ensure required folders exist
+function createRequiredFolders() {
+  [appFolder, logsFolder, outputFolder].forEach(folder => {
+    if (!fs.existsSync(folder)) {
+      logger.debug(`Creating required folder: ${folder}`);
+      fs.mkdirSync(folder, { recursive: true });
+    }
+  });
+}
+
 // Configure Winston logger
 const logger = winston.createLogger({
   level: 'debug', // Log levels: error, warn, info, http, verbose, debug, silly
@@ -17,10 +33,10 @@ const logger = winston.createLogger({
   transports: [
     new winston.transports.Console(), // Logs to console
     new DailyRotateFile({
-      filename: 'logs/app-%DATE%.log',
+      filename: path.join(logsFolder, 'app-%DATE%.log'), // Save logs in the 'logs' folder
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
-      // maxFiles: '14d',
+      maxFiles: '14d',
     }),
   ],
 });
@@ -30,7 +46,10 @@ logger.info('Application starting...');
 let mainWindow;
 
 app.on('ready', () => {
-  logger.info('Electron app is ready.');
+  // Ensure required folders are created
+  createRequiredFolders();
+  logger.info('Required folders checked and created if necessary.');
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 500,
@@ -53,7 +72,6 @@ ipcMain.handle('apply-watermark', async (event, config) => {
 
   const {
     inputDir,
-    outputDir,
     watermarkText,
     fontSize,
     opacity,
@@ -61,6 +79,9 @@ ipcMain.handle('apply-watermark', async (event, config) => {
     paddingLeftRight,
     crop,
   } = config;
+
+  // Use the predefined output folder
+  const outputDir = path.join(app.getPath('documents'), 'watermarker-app', 'output');
 
   try {
     if (!fs.existsSync(inputDir)) {
@@ -70,7 +91,7 @@ ipcMain.handle('apply-watermark', async (event, config) => {
 
     if (!fs.existsSync(outputDir)) {
       logger.info(`Output directory does not exist. Creating: ${outputDir}`);
-      fs.mkdirSync(outputDir);
+      fs.mkdirSync(outputDir, { recursive: true });
     }
 
     const files = fs.readdirSync(inputDir).filter(file => /\.(jpg|jpeg|png)$/i.test(file));
