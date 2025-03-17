@@ -7,7 +7,7 @@ const DailyRotateFile = require('winston-daily-rotate-file');
 
 // Define folder structure
 const documentsPath = app.getPath('documents'); // Get user's Documents folder
-const appFolder = path.join(documentsPath, 'watermarker-app'); // Root folder for the app
+const appFolder = path.join(documentsPath, 'Aegis-app'); // Root folder for the app
 const logsFolder = path.join(appFolder, 'logs'); // Logs folder
 const outputFolder = path.join(appFolder, 'output'); // Output folder
 const inputFolder = path.join(appFolder, 'input'); // Input Folder
@@ -84,7 +84,7 @@ ipcMain.handle('apply-watermark', async (event, config) => {
   } = config;
 
   // Use the predefined folders
-  const outputDir = path.join(app.getPath('documents'), 'watermarker-app', 'output');
+  const outputDir = path.join(app.getPath('documents'), 'Aegis-app', 'output');
 
   try {
     if (!fs.existsSync(inputDir)) {
@@ -188,4 +188,25 @@ ipcMain.handle('select-folder', async () => {
 
   logger.info(`Folder selected: ${result.filePaths[0]}`);
   return result.filePaths[0];
+});
+
+ipcMain.on('open-about-window', () => {
+  const aboutWindow = new BrowserWindow({
+    width: 500,
+    height: 500,
+    title: 'About Aegis',
+    resizable: false,
+    minimizable: false,
+    maximizable: false,
+    // modal: true,
+    parent: mainWindow,
+    webPreferences: {
+      contextIsolation: true,
+      enableRemoteModule: false,
+      preload: path.join(__dirname, 'preload.js'),
+    },
+  });
+
+  aboutWindow.loadFile('about.html');
+  logger.info('About window loaded.');
 });

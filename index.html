@@ -6,20 +6,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
         <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
-        <title>Watermark App</title>
+        <title>Aegis</title>
     </head>
-
+    <style>
+        table, th, td {
+          border:0px solid red;
+        }
+        </style>
     <body>
-        <h1>Watermarker</h1>
+        <table>
+            <tr>
+              <td><h1>Aegis</h1></td>
+              <td><button type="button" id="aboutButton">About Aegis</button></td>
+            </tr>
+        </table>
         <form id="watermarkForm">
             <div>
                 <label for="input-folder">Input Folder:</label>
-                <input type="text" id="input-folder" placeholder="documents/watermarker-app/input"">
+                <input type="text" id="input-folder" placeholder="documents/Aegis-app/input">
                 <button id="browse-input" type="button">Browse</button>
             </div>
             <div>
                 <label for="output-folder">Output Folder:</label>
-                <input type="text" disabled id="output-folder" placeholder="documents/watermarker-app/output">
+                <input type="text" disabled id="output-folder" placeholder="documents/Aegis-app/output">
             </div>
             <label>Watermark Text: <input type="text" id="watermarkText" value="© YourName"></label><br>
             <details>
@@ -32,8 +41,7 @@
             </details><br>
             <button type="button" id="startButton">Start</button>
         </form>
-        <div id="statusMessage" style="margin-top: 20px; color: green;"></div>
-        <p>© 2025 | Created & Designed by trleahy</p>
+        <div id="statusMessage" style="margin-top: 20px; color: green;"></div>        
     </body>
     <script src="renderer.js"></script>
 </html>

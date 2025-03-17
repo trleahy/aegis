@@ -56,3 +56,7 @@ document.getElementById('browse-input').addEventListener('click', async (event) 
     logMessage('warn', 'Input folder selection was canceled.');
   }
 });
+
+document.getElementById('aboutButton').addEventListener('click', () => {
+  window.electronAPI.openAboutWindow();
+});
