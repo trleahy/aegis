@@ -1,29 +1,30 @@
 {
-  "name": "watermark-app",
-  "version": "1.0.0",
-  "description": "A simple watermark application built with Electron.",
+  "name": "aegis",
+  "version": "1.1.0",
+  "description": "Aegis is a simple photo watermarking application that allows you to add custom watermarks to your images.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . WatermarkApp --platform=darwin --arch=x64 --out=dist --overwrite"
+    "package": "npx @electron/packager . WatermarkApp --platform=darwin --arch=x64 --out=dist --overwrite --prune=true --ignore=\"node_modules/@electron/packager\" --ignore=\".git\" --ignore=\".gitignore\" --ignore=\"README.md\" --ignore=\".DS_Store\" --ignore=\"npm-debug.log\" --ignore=\".vscode\" --ignore=\"*.log\"",
+    "package-optimized": "npx @electron/packager . WatermarkApp --platform=darwin --arch=x64 --out=dist --overwrite --prune=true --ignore=\"node_modules/@electron/packager\" --ignore=\"\\.git\" --ignore=\"\\.gitignore\" --ignore=\"README\\.md\" --ignore=\"\\.DS_Store\" --ignore=\"npm-debug\\.log\" --ignore=\"\\.vscode\" --ignore=\".*\\.log$\" --ignore=\"dist\" --ignore=\"\\.github\" --ignore=\"test\" --ignore=\"tests\" --ignore=\"spec\" --ignore=\"coverage\""
   },
   "devDependencies": {
-    "electron": "^25.3.0",
-    "electron-packager": "^17.1.2"
+    "@electron/packager": "^18.4.2",
+    "electron": "^37.3.1"
   },
   "dependencies": {
-    "sharp": "^0.32.1",
+    "sharp": "^0.34.3",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/trleahy/watermarker-app.git"
+    "url": "git+https://github.com/trleahy/aegis.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/trleahy/watermarker-app/issues"
+    "url": "https://github.com/trleahy/aegis/issues"
   },
-  "homepage": "https://github.com/trleahy/watermarker-app#readme"
+  "homepage": "https://github.com/trleahy/aegis#readme"
 }

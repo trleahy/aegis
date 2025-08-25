@@ -1,5 +1,5 @@
 # Aegis
-Aegis App is a simple photo watermarking application that allows you to add custom watermarks to your images.
+Aegis is a simple photo watermarking application that allows you to add custom watermarks to your images.
 
 Features:
 - Add text-based watermarks to images

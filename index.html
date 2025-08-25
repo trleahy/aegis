@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
-        <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
+        <link rel="stylesheet" href="styles/simple.css">
         <title>Aegis</title>
     </head>
     <style>
@@ -23,20 +23,20 @@
         <form id="watermarkForm">
             <div>
                 <label for="input-folder">Input Folder:</label>
-                <input type="text" id="input-folder" placeholder="documents/Aegis-app/input">
+                <input type="text" id="input-folder" placeholder="documents/Aegis/input">
                 <button id="browse-input" type="button">Browse</button>
             </div>
             <div>
                 <label for="output-folder">Output Folder:</label>
-                <input type="text" disabled id="output-folder" placeholder="documents/Aegis-app/output">
+                <input type="text" disabled id="output-folder" placeholder="documents/Aegis/output">
             </div>
-            <label>Watermark Text: <input type="text" id="watermarkText" value="© YourName"></label><br>
+            <label>Watermark Text: <input type="text" id="watermarkText" value="© YourName" required></label><br>
             <details>
                 <summary>Custom Options</summary>
-                <label>Font Size: <input type="number" id="fontSize" value="40"></label><br>
-                <label>Opacity (0-100): <input type="number" id="opacity" value="20"></label><br>
-                <label>Padding Top/Bottom: <input type="number" id="paddingTopBottom" value="200"></label><br>
-                <label>Padding Left/Right: <input type="number" id="paddingLeftRight" value="400"></label><br>
+                <label>Font Size: <input type="number" id="fontSize" value="40" min="1" max="200" required></label><br>
+                <label>Opacity (0-100): <input type="number" id="opacity" value="20" min="0" max="100" required></label><br>
+                <label>Padding Top/Bottom: <input type="number" id="paddingTopBottom" value="200" min="0" max="1000" required></label><br>
+                <label>Padding Left/Right: <input type="number" id="paddingLeftRight" value="400" min="0" max="1000" required></label><br>
                 <label>Crop to Aspect Ratio (5x4): <input type="checkbox" id="crop"></label><br>
             </details><br>
             <button type="button" id="startButton">Start</button>
